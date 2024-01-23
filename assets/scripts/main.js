@@ -19,11 +19,10 @@
         function motivo() {
             var motivo = motivos.filter((x) => document.getElementById('InputIDCategoriaMotivo').value == x.idCategoria);
             if (motivo.length == 0) {
-                document.getElementById('InputIDMotivo').innerHTML += `
-            <option value="0">Opções não encontradas</option>
-            `
+                document.getElementById('InputIDMotivo').setAttribute('disabled', 'disabled')
             }else{
                 motivo.forEach((element, index) => {
+                    document.getElementById('InputIDMotivo').removeAttribute('disabled')
                 document.getElementById('InputIDMotivo').innerHTML += `
             <option value="${element.idMotivo}">${element.Descricao}</option>
             `
