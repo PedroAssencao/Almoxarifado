@@ -45,3 +45,28 @@ const produtos=[
         "EstoqueMinimo": 5,
     },
 ]
+
+const departamentos = [
+  {
+      idDep: 10,
+      Descricao: "Sec. Educacao",
+      Responsavel: "José",
+      idFunc: 1,
+      idCargo: "Comissionado"
+  },
+  {
+      idDep: 30,
+      Descricao: "Sec. Trabalho",
+      Responsavel: "Luiz",
+      idFunc: 2,
+      idCargo: "Gestor"
+  },
+  {
+      idDep: 40,
+      Descricao: "NAT",
+      Responsavel: "Maria",
+      idFunc: 3,
+      idCargo: "Gerente"
+  },
+  
+]
