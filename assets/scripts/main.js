@@ -16,10 +16,22 @@ document.getElementById('InputIDCategoriaMotivo').addEventListener("change", (ev
 categoria()
 
 document.getElementById('InputCodProduto').addEventListener("change", (event) => {
-    // document.getElementById('InputIDMotivo').innerHTML = ``
     produto()
 
 });
+
+document.getElementById('InputIDDepartamento').addEventListener("change", (event) => {
+    Departamentos()
+    
+});
+
+function Departamentos() {
+    var Departamento = departamentos.filter((x) => document.getElementById('InputIDDepartamento').value == x.idDep)
+    document.getElementById('InputIDFunCargo').value = Departamento[0].idCargo
+    document.getElementById('InputIDFunID').value = Departamento[0].idFunc
+    document.getElementById('InputIDDepDescricao').value = Departamento[0].Descricao
+    document.getElementById('InputIDFunNome').value = Departamento[0].Responsavel
+}
 
 function motivo() {
     var motivo = motivos.filter((x) => document.getElementById('InputIDCategoriaMotivo').value == x.idCategoria);
@@ -35,6 +47,8 @@ function motivo() {
     }
 }
 
+
+
 function produto(){
     var produto = produtos.filter((x) => document.getElementById('InputCodProduto').value == x.idProduto);
     document.getElementById('InputIDEstoqueProduto').setAttribute('value', produto[0].Estoque)
@@ -42,11 +56,22 @@ function produto(){
     if (produto[0].Estoque > 0) {
         document.getElementById('InputIDProdutoQuantidade').removeAttribute('disabled')
     }
-
-    if (produto[0].EstoqueMinimo > customTooltip) {
-        
+    console.log()
+    if (produto[0].EstoqueMinimo >= 10) {
+        document.getElementById('customTooltip').style.backgroundColor = 'Green'
+    }else if (produto[0].EstoqueMinimo < 10) {
+        document.getElementById('customTooltip').style.backgroundColor = 'Yellow'
+    }else  {
+        document.getElementById('customTooltip').style.backgroundColor = 'red'
     }
 }
+
+function validarInput(input) {
+    var inputMax = document.getElementById('InputIDEstoqueProduto').value
+    if (input.value > inputMax) {
+      input.value = inputMax;
+    }
+  }
 
 
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

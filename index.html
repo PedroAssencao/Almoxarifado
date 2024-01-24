@@ -37,18 +37,18 @@
                     <div class="container-fluid">
                         <div class="row justify-content-center align-items-center">
                             <div class="col col-lg-1">
-                                <label class="display-1 fs-5" for="InputID">ID.</label>
-                                <input type="number" min="1" id="InputID" value="1" class="form-control"
+                                <label class="display-1 fs-5" for="InputIDDepartamento">ID.</label>
+                                <input type="number" min="1" id="InputIDDepartamento"  class="form-control"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col order-3 order-lg-0">
-                                <label class="display-1 fs-5" for="InputID">Departamento</label>
-                                <input type="text" id="InputID" class="form-control required"
+                                <label class="display-1 fs-5" for="InputIDDepDescricao">Departamento</label>
+                                <input type="text" id="InputIDDepDescricao" class="form-control required"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col col-lg-2">
-                                <label class="display-1 fs-5" for="InputID">Data</label>
-                                <input type="date" id="InputID" class="form-control required"
+                                <label class="display-1 fs-5" for="InputIDDepData">Data</label>
+                                <input type="date" id="InputIDDepData" class="form-control required"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                         </div>
@@ -61,19 +61,19 @@
                     <div class="container-fluid">
                         <div class="row justify-content-center align-items-center">
                             <div class="col-12 col-md-1">
-                                <label class="display-1 fs-5 wrap" style="text-wrap: nowrap;" for="InputID">ID
+                                <label class="display-1 fs-5 wrap" style="text-wrap: nowrap;" for="InputIDFunID">ID
                                     Func.</label>
-                                <input type="number" min="1" id="InputID" value="1" class="form-control"
+                                <input type="number" min="1" id="InputIDFunID"  class="form-control"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col-12 col-md">
-                                <label class="display-1 fs-5" for="InputID">Nome Funcionario</label>
-                                <input type="text" id="InputID" class="form-control required"
+                                <label class="display-1 fs-5" for="InputIDFunNome">Nome Funcionario</label>
+                                <input type="text" id="InputIDFunNome" class="form-control required"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col-12 col-md-2">
-                                <label class="display-1 fs-5" for="InputID">Cargo</label>
-                                <input type="text" id="InputID" class="form-control required"
+                                <label class="display-1 fs-5" for="InputIDFunCargo">Cargo</label>
+                                <input type="text" id="InputIDFunCargo" class="form-control required"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                         </div>
@@ -185,7 +185,7 @@
                             <div class="col col-lg-2">
                                 <label class="display-1 fs-5" for="InputIDProdutoQuantidade">Quantidade</label>
                                 <input type="number" id="InputIDProdutoQuantidade" disabled class="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-default" min="1">
+                                    aria-describedby="inputGroup-sizing-default" min="1" oninput="validarInput(this)">
                             </div>
                             
 
@@ -195,7 +195,6 @@
                             <a id="customTooltip" class="col col-lg-1 rounded mt-4"  
                                 data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="
-                                penis grande e grosso
                                 <div class='container-fluid tooltipcustom '> 
 
                                     <h6 class='text-dark'><span class='badge bg-success'>ㅤ</span> Estoque Acima de 10% do estoque minimo</h6>
