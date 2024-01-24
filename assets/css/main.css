@@ -1,0 +1,43 @@
+
+    .checkedred:checked {
+        background-color: #ff0000;
+
+        border-color: #ff0000;
+
+    }
+
+
+    .checkedyellow:checked {
+        background-color: yellow;
+
+        border-color: yellow;
+
+    }
+
+
+    .checkedgreen:checked {
+        background-color: green;
+
+        border-color: green;
+
+    }
+
+    .custom-tooltip {
+        --bs-tooltip-bg: var(--bd-violet-bg);
+        --bs-tooltip-color: var(--bs-white);
+    }
+
+    .form-control {
+        transition: background-color 0.3s ease;
+    }
+
+
+    .tooltipcustom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 15rem;
+        height: 15rem;
+        background: #f6f2ca;
+    }
