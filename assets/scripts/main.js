@@ -81,18 +81,13 @@ function Departamentos() {
       // Abre o modal
       meuModal.modal("show");
     });
-    document.getElementById("InputIDFunCargo").value = "";
-    document.getElementById("InputIDFunID").value = "";
+    document.getElementById('InputIDDepartamento').value = "";
     document.getElementById("InputIDDepDescricao").value = "";
-    document.getElementById("InputIDFunNome").value = "";
     return;
   } else {
-    document.getElementById("InputIDFunCargo").value = Departamento[0].idCargo;
-    document.getElementById("InputIDFunID").value = Departamento[0].idFunc;
     document.getElementById("InputIDDepDescricao").value =
       Departamento[0].Descricao;
-    document.getElementById("InputIDFunNome").value =
-      Departamento[0].Responsavel;
+   
   }
 }
 
@@ -113,10 +108,12 @@ function funcionarios() {
     });
     document.getElementById("InputIDFunID").value = "";
     document.getElementById("InputIDFunNome").value = "";
+    document.getElementById('InputIDFunCargo').value = "";
     return;
   } else {
     document.getElementById("InputIDFunNome").value =
       funcionario[0].Responsavel;
+      document.getElementById('InputIDFunCargo').value = funcionario[0].idCargo;
   }
 }
 
@@ -150,8 +147,10 @@ function motivo() {
 function checkCategoria() {
     if (document.getElementById("InputIDProdutoQuantidade") != 0 || document.getElementById("InputIDProdutoQuantidade") == 0) {
         document.getElementById('buttonGravar').removeAttribute('disabled')
+        document.getElementById('adicionarBtn').removeAttribute('disabled')
     }else{
         document.getElementById('buttonGravar').setAttribute('disabled', 'disabled')
+        document.getElementById('adicionarBtn').setAttribute('disabled', 'disabled')
     }
   
 }
@@ -181,6 +180,10 @@ function produto() {
   document
     .getElementById("InputIDDescricaoProduto")
     .setAttribute("value", produto[0].Descricao);
+
+    document
+    .getElementById("InputCodProduto")
+    .setAttribute("data-preco", produto[0].Preco);
 
   //checkar se o valor do estoque e maior que zero para ativar o butao
   if (produto[0].Estoque > 0) {
@@ -238,21 +241,65 @@ inputs.forEach((input) => {
   });
 });
 
-function ProdutosTables() {
-    produtos.forEach(element => {
-        document.getElementById('Tbody').innerHTML +=`
+var somaTotal = 0;
+
+function AdicionarTable(){
+ 
+
+  document.getElementById('Tbody').innerHTML +=`
         
-        <tr>
-        <th id="TableId" scope="row">${element.idProduto}</th>
-        <td id="TableDesc">${element.Descricao}</td>
-        <td id="TableQuantidade">${element.Estoque}</td>
-        <td id="TablePreco">${element.Preco}</td>
-        <td id="TableTotal">${parseFloat(element.Estoque) * parseFloat(element.Preco)}</td>
-        <td id="TableActions"><button class='btn btn-danger'>Remover</button></td>
-    </tr>
-        
+         <tr>
+           <th id="TableId" scope="row">${document.getElementById('InputCodProduto').value}</th>
+        <td id="TableDesc">${document.getElementById('InputIDDescricaoProduto').value}</td>
+          <td id="TableQuantidade">${document.getElementById('InputIDProdutoQuantidade').value}</td>
+       <td id="TablePreco">${document.getElementById('InputCodProduto').dataset.preco}</td>
+       <td id="TableTotal" class='TotalPreco'>${parseFloat(document.getElementById('InputCodProduto').dataset.preco) * parseFloat(document.getElementById('InputIDProdutoQuantidade').value)}</td>
+           <td id="TableActions"><button class='btn btn-danger' onclick='removeRow(this)'>Remover</button></td>
+     </tr>
+          
         `
-    });
+
+  
+// Inicialize a variável de soma fora do loop
+somaTotal = 0
+document.querySelectorAll('.TotalPreco').forEach(element => {
+    // Obtenha o valor do elemento e converta para float
+    var valorElemento = parseFloat(element.textContent);
+
+    // Some o valor ao acumulador
+    somaTotal += valorElemento;
+
+    // Atualize o conteúdo do elemento com id 'ValorTotal'
+    document.getElementById('ValorTotal').innerHTML = `Total: ${somaTotal.toFixed(2)}`;
+});
+
 }
 
-ProdutosTables()
+function removeRow(button) {
+  // Obtém a linha da tabela que contém o botão clicado
+  var row = button.parentNode.parentNode;
+  var valorTotal = row.querySelector('#TableTotal').innerText;
+  somaTotal = somaTotal - valorTotal
+  document.getElementById('ValorTotal').innerHTML = `Total: ${somaTotal.toFixed(2)}`;
+  row.remove();
+}
+
+
+// function ProdutosTables() {
+//     produtos.forEach(element => {
+//         document.getElementById('Tbody').innerHTML +=`
+        
+//         <tr>
+//         <th id="TableId" scope="row">${element.idProduto}</th>
+//         <td id="TableDesc">${element.Descricao}</td>
+//         <td id="TableQuantidade">${element.Estoque}</td>
+//         <td id="TablePreco">${element.Preco}</td>
+//         <td id="TableTotal">${parseFloat(element.Estoque) * parseFloat(element.Preco)}</td>
+//         <td id="TableActions"><button class='btn btn-danger'>Remover</button></td>
+//     </tr>
+        
+//         `
+//     });
+// }
+
+// ProdutosTables()
