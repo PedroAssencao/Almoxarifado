@@ -38,8 +38,8 @@
                         <div class="row justify-content-center align-items-center">
                             <div class="col col-lg-1">
                                 <label class="display-1 fs-5" for="InputIDDepartamento">ID.</label>
-                                <input type="number" min="1" id="InputIDDepartamento" class="form-control"
-                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <input type="number" min="1" id="InputIDDepartamento" class="form-control required"
+                                    aria-label="Sizing example input" data-obg="#" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col order-3 order-lg-0">
                                 <label class="display-1 fs-5" for="InputIDDepDescricao">Departamento</label>
@@ -63,7 +63,7 @@
                             <div class="col-12 col-md-1">
                                 <label class="display-1 fs-5 wrap" style="text-wrap: nowrap;" for="InputIDFunID">ID
                                     Func.</label>
-                                <input type="number" min="1" id="InputIDFunID" class="form-control"
+                                <input type="number" min="1" id="InputIDFunID" class="form-control required"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col-12 col-md">
@@ -168,8 +168,9 @@
                             <div class="col col-lg-2">
                                 <label class="display-1 fs-5" style="text-wrap: nowrap;" for="InputCodProduto">Cod.
                                     Produto</label>
-                                <input type="number" min="1" id="InputCodProduto" class="form-control"
-                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    <input type="number" min="1" id="InputCodProduto" class="form-control"
+                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                    >
                             </div>
                             <div class="col-12 col-md">
                                 <label class="display-1 fs-5" for="InputIDDescricaoProduto">Descrição</label>
@@ -227,6 +228,7 @@
                                     <th scope="col">Código</th>
                                     <th scope="col">Descrição</th>
                                     <th scope="col">Quantidade</th>
+                                    <th scope="col">Unidade</th>
                                     <th scope="col">Preço</th>
                                     <th scope="col">Total</th>
                                     <th scope="col">Ações</th>

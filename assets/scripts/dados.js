@@ -54,23 +54,32 @@ const departamentos = [
   {
       idDep: 10,
       Descricao: "Sec. Educacao",
-      Responsavel: "José",
-      idFunc: 1,
-      idCargo: "Comissionado"
   },
   {
       idDep: 30,
       Descricao: "Sec. Trabalho",
-      Responsavel: "Luiz",
-      idFunc: 2,
-      idCargo: "Gestor"
   },
   {
       idDep: 40,
       Descricao: "NAT",
-      Responsavel: "Maria",
-      idFunc: 3,
-      idCargo: "Gerente"
   },
   
+]
+
+const funcionario = [
+    {
+        idFunc: 1,
+        Responsavel: "José",
+        idCargo: "Comissionado"
+    },
+    {
+        idFunc: 2,
+        Responsavel: "Luiz",
+        idCargo: "Gestor"
+    },
+    {
+        idFunc: 3,
+        Responsavel: "Maria",
+        idCargo: "Gerente"
+    }
 ]

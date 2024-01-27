@@ -45,17 +45,30 @@ document.getElementById("InputIDFunID").addEventListener("change", (event) => {
 
 //checka se todos os itens obrigatorios estão preenchidos
 function check() {
-  $(document).ready(function () {
-    // Seletor para o modal
-    var meuModal = $("#meuModal");
-
-    // Abre o modal
-    meuModal.modal("show");
-  });
-
   var InputsControl = document.querySelectorAll(".required");
   InputsControl.forEach((element) => {
-    element.style.backgroundColor = "red";
+
+    console.log(typeof(element.value) == 'undefined')
+
+    if (element.value == "") {
+      element.style.backgroundColor = "red";  
+      $(document).ready(function () {
+        // Seletor para o modal
+        var meuModal = $("#meuModal");
+    
+        // Abre o modal
+        meuModal.modal("show");
+      });    
+    }else if(typeof(element.value) == 'undefined'){
+     document.querySelectorAll('#flexRadioDefault1').forEach(element => {
+      if (element.checked == true) {
+        element.style.backgroundColor = "";  
+        return
+      }else{
+        document.getElementById('radioBackgroud').style.backgroundColor = "red";  
+      }
+     });
+    } 
   });
 
   document.querySelectorAll(".form-check-input").forEach((element) => {
@@ -93,12 +106,12 @@ function Departamentos() {
 
 function funcionarios() {
   //filtra o funcionario por id
-  var funcionario = departamentos.filter(
+  var funcionarios = funcionario.filter(
     (x) => document.getElementById("InputIDFunID").value == x.idFunc
   );
 
   //se o id não for encontrado vai dar play no modal e vai apagar todos os campos se não vai inserir os valores no campos
-  if (funcionario.length == 0) {
+  if (funcionarios.length == 0) {
     $(document).ready(function () {
       // Seletor para o modal
       var meuModal = $("#meuModal2");
@@ -112,8 +125,8 @@ function funcionarios() {
     return;
   } else {
     document.getElementById("InputIDFunNome").value =
-      funcionario[0].Responsavel;
-      document.getElementById('InputIDFunCargo').value = funcionario[0].idCargo;
+    funcionarios[0].Responsavel;
+      document.getElementById('InputIDFunCargo').value = funcionarios[0].idCargo;
   }
 }
 
@@ -146,10 +159,8 @@ function motivo() {
 
 function checkCategoria() {
     if (document.getElementById("InputIDProdutoQuantidade") != 0 || document.getElementById("InputIDProdutoQuantidade") == 0) {
-        document.getElementById('buttonGravar').removeAttribute('disabled')
         document.getElementById('adicionarBtn').removeAttribute('disabled')
     }else{
-        document.getElementById('buttonGravar').setAttribute('disabled', 'disabled')
         document.getElementById('adicionarBtn').setAttribute('disabled', 'disabled')
     }
   
@@ -226,7 +237,7 @@ const tooltipList = [...tooltipTriggerList].map(
 );
 
 // Obtém todos os elementos com a classe .form-control
-const inputs = document.querySelectorAll(".form-control");
+const inputs = document.querySelectorAll("input, select");
 
 // Adiciona um ouvinte de evento para cada elemento
 inputs.forEach((input) => {
@@ -245,13 +256,14 @@ var somaTotal = 0;
 
 function AdicionarTable(){
  
-
+  document.getElementById('buttonGravar').removeAttribute('disabled')
   document.getElementById('Tbody').innerHTML +=`
         
          <tr>
            <th id="TableId" scope="row">${document.getElementById('InputCodProduto').value}</th>
         <td id="TableDesc">${document.getElementById('InputIDDescricaoProduto').value}</td>
           <td id="TableQuantidade">${document.getElementById('InputIDProdutoQuantidade').value}</td>
+          <td id="TableUn">Un</td>
        <td id="TablePreco">${document.getElementById('InputCodProduto').dataset.preco}</td>
        <td id="TableTotal" class='TotalPreco'>${parseFloat(document.getElementById('InputCodProduto').dataset.preco) * parseFloat(document.getElementById('InputIDProdutoQuantidade').value)}</td>
            <td id="TableActions"><button class='btn btn-danger' onclick='removeRow(this)'>Remover</button></td>
@@ -303,3 +315,4 @@ function removeRow(button) {
 // }
 
 // ProdutosTables()
+
