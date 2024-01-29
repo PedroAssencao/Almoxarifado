@@ -27,6 +27,42 @@ namespace src
             driver.Manage().Window.Size = new System.Drawing.Size(1360, 720);
             driver.FindElement(By.Id("botaoGravar")).Click();
             Assert.Equal(driver.SwitchTo().Alert().Text, "Preencha todos os campos obrigatórios antes de gravar.");
+          
+            var ResultadoEsperado = "rgba(255, 0, 0, 0.7)";
+
+            try
+            {
+                var Resultadodepartamento = driver.FindElement(By.Id("departamento")).GetAttribute("style");
+                var ResultadoidDepartamento = driver.FindElement(By.Id("idDepartamento")).GetAttribute("style");
+                var ResultadoinpNumero = driver.FindElement(By.Id("inpNumero")).GetAttribute("style");
+                var ResultadoidFuncionario = driver.FindElement(By.Id("idFuncionario")).GetAttribute("style");
+                var Resultadocargo = driver.FindElement(By.Id("cargo")).GetAttribute("style");
+                var ResultadodataRequisicao = driver.FindElement(By.Id("dataRequisicao")).GetAttribute("style");
+                var ResultadoradioPrioridade = driver.FindElement(By.ClassName("radioPrioridade")).GetAttribute("style");
+                Assert.Contains(ResultadoEsperado, Resultadodepartamento);
+                Assert.Contains(ResultadoEsperado, ResultadoidDepartamento);
+                Assert.Contains(ResultadoEsperado, ResultadoinpNumero);
+                Assert.Contains(ResultadoEsperado, Resultadocargo);
+                Assert.Contains(ResultadoEsperado, ResultadodataRequisicao);
+                Assert.Contains(ResultadoEsperado, ResultadoradioPrioridade);
+            }
+            catch (Exception)
+            {
+
+                var Resultadodepartamento = driver.FindElement(By.Id("departamento")).GetAttribute("style");
+                var ResultadoidDepartamento = driver.FindElement(By.Id("idDepartamento")).GetAttribute("style");
+                var ResultadoinpNumero = driver.FindElement(By.Id("inpNumero")).GetAttribute("style");
+                var ResultadoidFuncionario = driver.FindElement(By.Id("idFuncionario")).GetAttribute("style");
+                var Resultadocargo = driver.FindElement(By.Id("cargo")).GetAttribute("style");
+                var ResultadodataRequisicao = driver.FindElement(By.Id("dataRequisicao")).GetAttribute("style");
+                var ResultadoradioPrioridade = driver.FindElement(By.ClassName("radioPrioridade")).GetAttribute("style");
+                Assert.Contains(ResultadoEsperado, Resultadodepartamento);
+                Assert.Contains(ResultadoEsperado, ResultadoidDepartamento);
+                Assert.Contains(ResultadoEsperado, ResultadoinpNumero);
+                Assert.Contains(ResultadoEsperado, Resultadocargo);
+                Assert.Contains(ResultadoEsperado, ResultadodataRequisicao);
+                Assert.Contains(ResultadoEsperado, ResultadoradioPrioridade);
+            }
             driver.Quit();
         }
 
