@@ -6,7 +6,9 @@ namespace src
 {
     public class RequisicaoTest
     {
-
+        //selenium version: 121.0.6167.8500
+        //chrome version: 121.0.6167.86
+        //openQA verion: 1.2.0
         public IWebDriver driver { get; private set; }
         public IDictionary<string, object> vars { get; private set; }
         public IJavaScriptExecutor js { get; private set; }
