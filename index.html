@@ -38,12 +38,12 @@
                         <div class="row justify-content-center align-items-center">
                             <div class="col col-lg-1">
                                 <label class="display-1 fs-5" for="InputIDDepartamento">ID.</label>
-                                <input type="number" min="1" id="InputIDDepartamento" class="form-control required"
+                                <input type="text" min="1" id="InputIDDepartamento" class="form-control required"
                                     aria-label="Sizing example input" data-obg="#" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col order-3 order-lg-0">
                                 <label class="display-1 fs-5" for="InputIDDepDescricao">Departamento</label>
-                                <input type="text" id="InputIDDepDescricao" class="form-control required"
+                                <input type="text" id="InputIDDepDescricao" disabled class="form-control required"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col col-lg-2">
@@ -63,17 +63,17 @@
                             <div class="col-12 col-md-1">
                                 <label class="display-1 fs-5 wrap" style="text-wrap: nowrap;" for="InputIDFunID">ID
                                     Func.</label>
-                                <input type="number" min="1" id="InputIDFunID" class="form-control required"
+                                <input type="text" min="1" id="InputIDFunID" class="form-control required"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col-12 col-md">
                                 <label class="display-1 fs-5" for="InputIDFunNome">Nome Funcionario</label>
-                                <input type="text" id="InputIDFunNome" class="form-control"
+                                <input type="text" id="InputIDFunNome" disabled class="form-control"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col-12 col-md-2">
                                 <label class="display-1 fs-5" for="InputIDFunCargo">Cargo</label>
-                                <input type="text" id="InputIDFunCargo" class="form-control required"
+                                <input type="text" id="InputIDFunCargo" disabled class="form-control required"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                         </div>
@@ -168,23 +168,23 @@
                             <div class="col col-lg-2">
                                 <label class="display-1 fs-5" style="text-wrap: nowrap;" for="InputCodProduto">Cod.
                                     Produto</label>
-                                    <input type="number" min="1" id="InputCodProduto" class="form-control"
+                                    <input type="text" min="1" id="InputCodProduto" class="form-control"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
                                     >
                             </div>
-                            <div class="col-12 col-md">
+                            <div class="col-12 col-md" style="width: 200px;">
                                 <label class="display-1 fs-5" for="InputIDDescricaoProduto">Descrição</label>
-                                <input type="text" id="InputIDDescricaoProduto" class="form-control"
+                                <input type="text"  style="width: 200px;" id="InputIDDescricaoProduto" disabled class="form-control"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col col-lg-2">
                                 <label class="display-1 fs-5" for="InputIDEstoqueProduto">Estoque</label>
-                                <input type="text" id="InputIDEstoqueProduto" class="form-control"
+                                <input type="text" id="InputIDEstoqueProduto" disabled class="form-control"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="col col-lg-2">
                                 <label class="display-1 fs-5" for="InputIDProdutoQuantidade">Quantidade</label>
-                                <input type="number" id="InputIDProdutoQuantidade" disabled class="form-control"
+                                <input type="text" id="InputIDProdutoQuantidade" disabled class="form-control"
                                     aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
                                     min="1" oninput="validarInput(this)">
                             </div>
@@ -193,7 +193,7 @@
 
 
                             <!--TollTip-->
-                            <a id="customTooltip" class="col col-lg-1 rounded mt-4"
+                            <a id="customTooltip" class="quadrado rounded mt-4"
                                 data-bs-custom-class="custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="
                                 <div class='container-fluid tooltipcustom '> 

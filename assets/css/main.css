@@ -37,7 +37,17 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 15rem;
+        width: 25rem;
         height: 15rem;
         background: #f6f2ca;
+    }
+
+    .quadrado{
+        width: 1rem;
+        height: 2.5rem;
+    }
+
+    .descricao{
+        width: 100px;
+
     }

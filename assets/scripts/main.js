@@ -1,4 +1,5 @@
 //codigo para puxar todas as categorias e chamar a função motivo
+
 function categoria() {
   categorias.forEach((element) => {
     document.getElementById("InputIDCategoriaMotivo").innerHTML += `
@@ -11,16 +12,23 @@ function categoria() {
 //chama a função de motivo quando a categoria muda
 document
   .getElementById("InputIDCategoriaMotivo")
-  .addEventListener("change", (event) => {
+  .addEventListener("change", function(e) {
     document.getElementById("InputIDMotivo").innerHTML = ``;
     motivo();
   });
 
   document
   .getElementById("InputIDProdutoQuantidade")
-  .addEventListener("change", (event) => {
+  .addEventListener("keyup",function(e){
+    const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105]
+    if (!teclasAceitas.includes(e.keyCode)) {
+      document.querySelector('#InputIDProdutoQuantidade').value = ''
+      checkCategoria()
+  }else{
     checkCategoria()
-  });
+  }
+  } 
+  );
 
 
 //chama a categoria quando a pagina carregar
@@ -29,18 +37,33 @@ categoria();
 //event listner para ativar a função de busca de produto
 document
   .getElementById("InputCodProduto")
-  .addEventListener("change", (event) => {
+  .addEventListener("keyup", function(e) {
+    const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105]
+    if (!teclasAceitas.includes(e.keyCode)) {
+      document.querySelector('#InputCodProduto').value = ''
+  }else{
     produto();
+  }
   });
 
 document
   .getElementById("InputIDDepartamento")
-  .addEventListener("change", (event) => {
-    Departamentos();
+  .addEventListener("keyup", function(e) {
+    const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105]  
+    if (!teclasAceitas.includes(e.keyCode)) {
+      document.querySelector('#InputIDDepartamento').value = ''
+  }else{
+    Departamentos()
+  }
   });
 
-document.getElementById("InputIDFunID").addEventListener("change", (event) => {
+document.getElementById("InputIDFunID").addEventListener("keyup", function(e)  {
+  const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105]
+  if (!teclasAceitas.includes(e.keyCode)) {
+    document.querySelector('#InputIDFunID').value = ''
+}else{
   funcionarios();
+}
 });
 
 //checka se todos os itens obrigatorios estão preenchidos
@@ -53,11 +76,11 @@ function check() {
     if (element.value == "") {
       element.style.backgroundColor = "red";  
       $(document).ready(function () {
-        // Seletor para o modal
-        var meuModal = $("#meuModal");
+        // // Seletor para o modal
+        // var meuModal = $("#meuModal");
     
-        // Abre o modal
-        meuModal.modal("show");
+        // // Abre o modal
+        // meuModal.modal("show");
       });    
     }else if(typeof(element.value) == 'undefined'){
      document.querySelectorAll('#flexRadioDefault1').forEach(element => {
@@ -88,13 +111,13 @@ function Departamentos() {
   //se o id não for encontrado vai dar play no modal e vai apagar todos os campos se não vai inserir os valores no campos
   if (Departamento.length == 0) {
     $(document).ready(function () {
-      // Seletor para o modal
-      var meuModal = $("#meuModal2");
+      // // Seletor para o modal
+      // var meuModal = $("#meuModal2");
 
-      // Abre o modal
-      meuModal.modal("show");
+      // // Abre o modal
+      // meuModal.modal("show");
     });
-    document.getElementById('InputIDDepartamento').value = "";
+
     document.getElementById("InputIDDepDescricao").value = "";
     return;
   } else {
@@ -113,13 +136,13 @@ function funcionarios() {
   //se o id não for encontrado vai dar play no modal e vai apagar todos os campos se não vai inserir os valores no campos
   if (funcionarios.length == 0) {
     $(document).ready(function () {
-      // Seletor para o modal
-      var meuModal = $("#meuModal2");
+      // // Seletor para o modal
+      // var meuModal = $("#meuModal2");
 
-      // Abre o modal
-      meuModal.modal("show");
+      // // Abre o modal
+      // meuModal.modal("show");
     });
-    document.getElementById("InputIDFunID").value = "";
+
     document.getElementById("InputIDFunNome").value = "";
     document.getElementById('InputIDFunCargo').value = "";
     return;
@@ -158,7 +181,7 @@ function motivo() {
 }
 
 function checkCategoria() {
-    if (document.getElementById("InputIDProdutoQuantidade") != 0 || document.getElementById("InputIDProdutoQuantidade") == 0) {
+    if (document.getElementById("InputIDProdutoQuantidade") == 0) {
         document.getElementById('adicionarBtn').removeAttribute('disabled')
     }else{
         document.getElementById('adicionarBtn').setAttribute('disabled', 'disabled')
@@ -172,19 +195,20 @@ function produto() {
   var produto = produtos.filter(
     (x) => document.getElementById("InputCodProduto").value == x.idProduto
   );
-  if (produto.length == 0) {
-    document.getElementById('InputCodProduto').value = ""
+  console.log(produto[0].length == 0)
+  if (produto[0].length == 0) {
     document.getElementById('InputIDDescricaoProduto').value = ""
     document.getElementById('InputIDEstoqueProduto').value = ""
     $(document).ready(function () {
-        // Seletor para o modal
-        var meuModal = $("#meuModal2");
+        // // Seletor para o modal
+        // var meuModal = $("#meuModal2");
   
-        // Abre o modal
-        meuModal.modal("show");
+        // // Abre o modal
+        // meuModal.modal("show");
       });
-  }
+  }else{
   //setar os valores nos inputs
+  console.log(produto[0])
   document
     .getElementById("InputIDEstoqueProduto")
     .setAttribute("value", produto[0].Estoque);
@@ -197,19 +221,29 @@ function produto() {
     .setAttribute("data-preco", produto[0].Preco);
 
   //checkar se o valor do estoque e maior que zero para ativar o butao
+  console.log(produto[0].Estoque)
   if (produto[0].Estoque > 0) {
     document
       .getElementById("InputIDProdutoQuantidade")
       .removeAttribute("disabled");
   }
+  else{
+    document
+    .getElementById("InputIDProdutoQuantidade")
+     setAttribute('disabled', true)
+  }
+}
 
   //checkar o estoque minimo para mudar a cor do retangulo
-  if (produto[0].EstoqueMinimo >= 10) {
+  if (produto[0].Estoque >= Math.round(produto[0].EstoqueMinimo/10) +  produto[0].EstoqueMinimo) {
+    console.log(Math.round(produto[0].EstoqueMinimo/10) +  produto[0].EstoqueMinimo)
     document.getElementById("customTooltip").style.backgroundColor = "Green";
-  } else if (produto[0].EstoqueMinimo < 10) {
-    document.getElementById("customTooltip").style.backgroundColor = "Yellow";
+  } else if (produto[0].Estoque <= produto[0].EstoqueMinimo - Math.round(produto[0].EstoqueMinimo/10)) {
+    document.getElementById("customTooltip").style.backgroundColor = "Red";
+    console.log(Math.round(produto[0].EstoqueMinimo/10) +  produto[0].EstoqueMinimo)
   } else {
-    document.getElementById("customTooltip").style.backgroundColor = "red";
+    document.getElementById("customTooltip").style.backgroundColor = "Yellow";
+    console.log(Math.round(produto[0].EstoqueMinimo/10) +  produto[0].EstoqueMinimo)
   }
 }
 
