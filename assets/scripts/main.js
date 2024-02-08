@@ -20,7 +20,7 @@ document
   document
   .getElementById("InputIDProdutoQuantidade")
   .addEventListener("keyup",function(e){
-    const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105]
+    const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105,8]
     if (!teclasAceitas.includes(e.keyCode)) {
       document.querySelector('#InputIDProdutoQuantidade').value = ''
       checkCategoria()
@@ -38,8 +38,9 @@ categoria();
 document
   .getElementById("InputCodProduto")
   .addEventListener("keyup", function(e) {
-    const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105]
+    const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105,8]
     if (!teclasAceitas.includes(e.keyCode)) {
+      console.log(e.keyCode)
       document.querySelector('#InputCodProduto').value = ''
   }else{
     produto();
@@ -49,20 +50,24 @@ document
 document
   .getElementById("InputIDDepartamento")
   .addEventListener("keyup", function(e) {
-    const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105]  
+    const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105,8]  
     if (!teclasAceitas.includes(e.keyCode)) {
       document.querySelector('#InputIDDepartamento').value = ''
   }else{
     Departamentos()
+    document.getElementById("InputIDDepDescricao").style.backgroundColor = "";
+    document.getElementById("InputIDDepData").style.backgroundColor = "";
   }
   });
 
 document.getElementById("InputIDFunID").addEventListener("keyup", function(e)  {
-  const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105]
+  const teclasAceitas = [48,49,50,51,52,53,54,55,56,57,99,98,97,96,99,100,101,102,103,104,105,8]
   if (!teclasAceitas.includes(e.keyCode)) {
     document.querySelector('#InputIDFunID').value = ''
 }else{
   funcionarios();
+  document.getElementById("InputIDFunCargo").style.backgroundColor = "";
+
 }
 });
 
@@ -181,7 +186,8 @@ function motivo() {
 }
 
 function checkCategoria() {
-    if (document.getElementById("InputIDProdutoQuantidade") == 0) {
+  console.log(document.getElementById("InputIDProdutoQuantidade").value)
+    if (document.getElementById("InputIDProdutoQuantidade").value != 0) {
         document.getElementById('adicionarBtn').removeAttribute('disabled')
     }else{
         document.getElementById('adicionarBtn').setAttribute('disabled', 'disabled')
@@ -195,31 +201,33 @@ function produto() {
   var produto = produtos.filter(
     (x) => document.getElementById("InputCodProduto").value == x.idProduto
   );
-  console.log(produto[0].length == 0)
-  if (produto[0].length == 0) {
+  if (produto[0] == undefined) {
     document.getElementById('InputIDDescricaoProduto').value = ""
     document.getElementById('InputIDEstoqueProduto').value = ""
-    $(document).ready(function () {
-        // // Seletor para o modal
-        // var meuModal = $("#meuModal2");
-  
-        // // Abre o modal
-        // meuModal.modal("show");
-      });
+    document.getElementById('InputIDProdutoQuantidade').value = ""
+    document.getElementById('adicionarBtn').setAttribute('disabled', 'disabled')
+    return
   }else{
-  //setar os valores nos inputs
-  console.log(produto[0])
-  document
+    document
     .getElementById("InputIDEstoqueProduto")
-    .setAttribute("value", produto[0].Estoque);
+    .value = produto[0].Estoque;
   document
     .getElementById("InputIDDescricaoProduto")
-    .setAttribute("value", produto[0].Descricao);
+    .value = produto[0].Descricao;
 
     document
     .getElementById("InputCodProduto")
     .setAttribute("data-preco", produto[0].Preco);
+  }
 
+  //checkar o estoque minimo para mudar a cor do retangulo
+  if (produto[0].Estoque >= Math.round(produto[0].EstoqueMinimo/10) +  produto[0].EstoqueMinimo) {
+    document.getElementById("customTooltip").style.backgroundColor = "Green";
+  } else if (produto[0].Estoque <= produto[0].EstoqueMinimo - Math.round(produto[0].EstoqueMinimo/10)) {
+    document.getElementById("customTooltip").style.backgroundColor = "Red";
+  } else {
+    document.getElementById("customTooltip").style.backgroundColor = "Yellow";
+  }
   //checkar se o valor do estoque e maior que zero para ativar o butao
   console.log(produto[0].Estoque)
   if (produto[0].Estoque > 0) {
@@ -232,20 +240,10 @@ function produto() {
     .getElementById("InputIDProdutoQuantidade")
      setAttribute('disabled', true)
   }
+
+ 
 }
 
-  //checkar o estoque minimo para mudar a cor do retangulo
-  if (produto[0].Estoque >= Math.round(produto[0].EstoqueMinimo/10) +  produto[0].EstoqueMinimo) {
-    console.log(Math.round(produto[0].EstoqueMinimo/10) +  produto[0].EstoqueMinimo)
-    document.getElementById("customTooltip").style.backgroundColor = "Green";
-  } else if (produto[0].Estoque <= produto[0].EstoqueMinimo - Math.round(produto[0].EstoqueMinimo/10)) {
-    document.getElementById("customTooltip").style.backgroundColor = "Red";
-    console.log(Math.round(produto[0].EstoqueMinimo/10) +  produto[0].EstoqueMinimo)
-  } else {
-    document.getElementById("customTooltip").style.backgroundColor = "Yellow";
-    console.log(Math.round(produto[0].EstoqueMinimo/10) +  produto[0].EstoqueMinimo)
-  }
-}
 
 //checka o valo maximo do estoque para não ultrapassar no input
 function validarInput(input) {
@@ -271,7 +269,7 @@ const tooltipList = [...tooltipTriggerList].map(
 );
 
 // Obtém todos os elementos com a classe .form-control
-const inputs = document.querySelectorAll("input, select");
+const inputs = document.querySelectorAll('[fica-verde="true"]')
 
 // Adiciona um ouvinte de evento para cada elemento
 inputs.forEach((input) => {
@@ -294,13 +292,13 @@ function AdicionarTable(){
   document.getElementById('Tbody').innerHTML +=`
         
          <tr>
-           <th id="TableId" scope="row">${document.getElementById('InputCodProduto').value}</th>
+           <th id="TableId" class="text-center"  scope="row">${document.getElementById('InputCodProduto').value}</th>
         <td id="TableDesc">${document.getElementById('InputIDDescricaoProduto').value}</td>
-          <td id="TableQuantidade">${document.getElementById('InputIDProdutoQuantidade').value}</td>
-          <td id="TableUn">Un</td>
-       <td id="TablePreco">${document.getElementById('InputCodProduto').dataset.preco}</td>
-       <td id="TableTotal" class='TotalPreco'>${parseFloat(document.getElementById('InputCodProduto').dataset.preco) * parseFloat(document.getElementById('InputIDProdutoQuantidade').value)}</td>
-           <td id="TableActions"><button class='btn btn-danger' onclick='removeRow(this)'>Remover</button></td>
+          <td id="TableQuantidade" class="text-center" >${document.getElementById('InputIDProdutoQuantidade').value}</td>
+          <td id="TableUn" class="text-center" >Un</td>
+       <td id="TablePreco" class="text-center" >R$${(parseFloat(document.getElementById('InputCodProduto').dataset.preco)).toFixed(2)}</td>
+       <td id="TableTotal" class='TotalPreco text-center'>R$${(parseFloat(document.getElementById('InputCodProduto').dataset.preco) * parseFloat(document.getElementById('InputIDProdutoQuantidade').value)).toFixed(2)}</td>
+           <td id="TableActions"  class="text-center"><button class='btn btn-danger' onclick='removeRow(this)'>Remover</button></td>
      </tr>
           
         `
@@ -310,13 +308,13 @@ function AdicionarTable(){
 somaTotal = 0
 document.querySelectorAll('.TotalPreco').forEach(element => {
     // Obtenha o valor do elemento e converta para float
-    var valorElemento = parseFloat(element.textContent);
-
+    
+    var valorElemento = parseFloat(element.textContent.replace(/[^0-9]/g,''))/100
     // Some o valor ao acumulador
     somaTotal += valorElemento;
 
     // Atualize o conteúdo do elemento com id 'ValorTotal'
-    document.getElementById('ValorTotal').innerHTML = `Total: ${somaTotal.toFixed(2)}`;
+    document.getElementById('ValorTotal').innerHTML = `Total: R$${somaTotal.toFixed(2)}`;
 });
 
 }
@@ -324,9 +322,9 @@ document.querySelectorAll('.TotalPreco').forEach(element => {
 function removeRow(button) {
   // Obtém a linha da tabela que contém o botão clicado
   var row = button.parentNode.parentNode;
-  var valorTotal = row.querySelector('#TableTotal').innerText;
+  var valorTotal = row.querySelector('#TableTotal').innerText.replace(/[^0-9]/g,'')/100;
   somaTotal = somaTotal - valorTotal
-  document.getElementById('ValorTotal').innerHTML = `Total: ${somaTotal.toFixed(2)}`;
+  document.getElementById('ValorTotal').innerHTML = `Total: R$${somaTotal.toFixed(2)}`;
   row.remove();
 }
 
